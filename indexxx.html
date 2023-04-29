@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>アニメ評価検索サイト</title>
+    <style>
+      body {
+        background-image: url('https://images.unsplash.com/photo-1488747279003-4c6ceaf6e9bc');
+        background-size: cover;
+        background-position: center;
+        animation: sky 30s ease infinite;
+      }
+      @keyframes sky {
+        0% {
+          background-color: #1E90FF;
+        }
+        50% {
+          background-color: #87CEEB;
+        }
+        100% {
+          background-color: #1E90FF;
+        }
+      }
+      h1 {
+        text-align: center;
+        color: white;
+        text-shadow: 2px 2px #333;
+      }
+      form {
+        text-align: center;
+        margin: 20px;
+      }
+      label {
+        color: white;
+        margin-right: 10px;
+      }
+      input[type="text"] {
+        padding: 5px;
+        border-radius: 5px;
+        border: none;
+        font-size: 16px;
+        width: 200px;
+      }
+      button[type="submit"] {
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #4CAF50;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      #anime-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 20px;
+      }
+      .anime-card {
+        width: 300px;
+        background-color: white;
+        box-shadow: 2px 2px 10px #333;
+        margin: 10px;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      .anime-card h2 {
+        font-size: 24px;
+        margin-bottom: 5px;
+      }
+      .anime-card p {
+        margin: 5px;
+        font-size: 16px;
+      }
+      .anime-card img {
+        display: block;
+        margin: 10px auto;
+        max-width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>アニメ評価検索サイト</h1>
+    <form>
+      <label for="search">搜尋:</label>
+      <input type="text" id="search" name="search">
+      <button type="submit">搜尋</button>
+    </form>
+    <div id="anime-list"></div>
+    <script>
+      const animeList = [
+        { name: "進撃の巨人", author: "諫山創", rating: 8.9, image: "https://upload.wikimedia.org/wikipedia/zh/f/f1/Attack_on_Titan_vol1.jpg" },
+        { name: "鬼滅の刃", author: "吾峠呼世晴", rating: 9.2, image: "https://diz36nn4q02zr.cloudfront.net/webapi/imagesV3/Original/SalePage/4686802/0/638179254261700000?v=1" },
+        { name: "ソードアート・オンライン", author: "川原礫", rating: 7.6, image: "https://taiwan-image.bookwalker.com.tw/product/5087/5087_1.jpg" },
+        { name: "君の名は", author: "新海誠", rating: 9.0, image: "https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/074/72/0010747297.jpg&v=58c917c7k&w=348&h=348" },
+        { name: "風の谷のナウシカ", author: "宮崎駿", rating: 8.4, image: "https://yoyo7712010.weebly.com/uploads/2/6/8/7/26872189/4328686.jpg?295" },
+        { name: "翠星のガルガンティア", author: "田中芳樹", rating: 7.9, image: "https://media.taaze.tw/showLargeImage.html?sc=11100669392&width=340&height=474" },
+        { name: "ぎんたま", author: "空知英秋", rating: 8.7, image: "https://im2.book.com.tw/image/getImage?i=https://www.books.com.tw/img/E05/011/01/E050110109.jpg&v=620dbfd2k&w=348&h=348" },
+      ];
+
+      const animeContainer = document.getElementById("anime-list");
+      const searchInput = document.getElementById("search");
+
+      function displayAnime(animeArray) {
+        animeContainer.innerHTML = "";
+        animeArray.forEach((anime) => {
+          const animeCard = document.createElement("div");
+          animeCard.innerHTML = `
+            <h2>${anime.name}</h2>
+            <p>作者: ${anime.author}</p>
+            <p>評價: ${anime.rating}</p>
+            <img src="${anime.image}">
+          `;
+          animeContainer.appendChild(animeCard);
+        });
+      }
+
+      function searchAnime(query) {
+        const results = animeList.filter(anime => anime.name.toLowerCase().includes(query.toLowerCase()));
+        displayAnime(results);
+      }
+
+      searchInput.addEventListener("input", (event) => {
+        const query = event.target.value;
+        searchAnime(query);
+      });
+
+      displayAnime(animeList);
+    </script>
+  </body>
+</html>
+
+
+

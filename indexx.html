@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>動漫查詢網站</title>
+  </head>
+  <body>
+    <h1>動漫查詢網站</h1>
+    <form>
+      <label for="search">搜尋:</label>
+      <input type="text" id="search" name="search">
+      <button type="submit">搜尋</button>
+    </form>
+    <select id="category">
+      <option value="all">全部</option>
+      <option value="action">動作</option>
+      <option value="romance">浪漫</option>
+      <option value="comedy">喜劇</option>
+    </select>
+    <button onclick="sortByName()">按名稱排序</button>
+    <button onclick="sortByRating()">按評分排序</button>
+    <div id="anime-list"></div>
+
+    <script>
+      const animeList = [
+        { name: "進擊的巨人", category: "action", rating: 8.9, image: "https://via.placeholder.com/150" },
+        { name: "鬼滅之刃", category: "action", rating: 9.2, image: "https://via.placeholder.com/150" },
+        { name: "刀劍神域", category: "action", rating: 7.6, image: "https://via.placeholder.com/150" },
+        { name: "你的名字", category: "romance", rating: 9.0, image: "https://via.placeholder.com/150" },
+        { name: "風之谷", category: "romance", rating: 8.4, image: "https://via.placeholder.com/150" },
+        { name: "翠星上的加爾岡", category: "romance", rating: 7.9, image: "https://via.placeholder.com/150" },
+        { name: "銀魂", category: "comedy", rating: 8.7, image: "https://via.placeholder.com/150" }
+      ];
+
+      const form = document.querySelector("form");
+      const categorySelect = document.querySelector("#category");
+      const animeListDiv = document.querySelector("#anime-list");
+
+      function displayAnimeList(animeList) {
+        animeListDiv.innerHTML = "";
+        animeList.forEach(anime => {
+          const animeDiv = document.createElement("div");
+          animeDiv.classList.add("anime");
+
+          const imageElement = document.createElement("img");
+          imageElement.src = anime.image;
+          animeDiv.appendChild(imageElement);
+
+          const nameElement = document.createElement("p");
+          nameElement.textContent = anime.name;
+          animeDiv.appendChild(nameElement);
+
+          const ratingElement = document.createElement("p");
+          ratingElement.textContent = `評分: ${anime.rating}`;
+          animeDiv.appendChild(ratingElement);
+
+          const categoryElement = document.createElement("p");
+          categoryElement.textContent = `類型: ${anime.category}`;
+          animeDiv.appendChild(categoryElement);
+
+          animeListDiv.appendChild(animeDiv);
+        });
+      }
+
+      function searchAnime(event) {
+        event.preventDefault();
+        const searchString = event.target.elements.search.value.trim().
+
+      
+
